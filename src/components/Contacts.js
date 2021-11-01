@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withStyles, TextField, Grid } from "@material-ui/core";
+import { withStyles, TextField, Grid, MenuItem, InputLabel, Select, FormControl } from "@material-ui/core";
 import { ladyIcon, phoneIcon } from "./iconPaths";
 const style = (theme) => {
     return {
@@ -63,17 +63,21 @@ const Contacts = ({ classes, formSubmitted }) => {
                     </svg> */}
                 </Grid>
                 <Grid item xs={10}>
-                    <TextField
-                        name="name"
-                        id="name"
-                        value={name}
-                        fullWidth
-                        margin="normal"
-                        label="Enter Layer 1 Name"
-                        variant="filled"
-                        onChange={handleNameChange}
-                        disabled={formSubmitted}
-                    />
+
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Layer 1</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={name}
+                            label="Layer 1"
+                            onChange={handleNameChange}
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField
                         name="name"
                         id="name"
@@ -100,17 +104,21 @@ const Contacts = ({ classes, formSubmitted }) => {
                     </svg> */}
                 </Grid>
                 <Grid item xs={10}>
-                    <TextField
-                        name="phone"
-                        id="phone"
-                        value={phone}
-                        fullWidth
-                        margin="normal"
-                        label="Enter Layer 2 Name "
-                        variant="filled"
-                        onChange={handlePhoneChange}
-                        disabled={formSubmitted}
-                    />
+
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Layer 2</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={phone}
+                            label="Layer 2"
+                            onChange={handlePhoneChange}
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField
                         name="phone"
                         id="phone"
