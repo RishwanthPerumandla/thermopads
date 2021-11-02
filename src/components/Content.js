@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
 import { Paper, Grid, Typography, withStyles, Button, FormControl, InputLabel, Select, MenuItem, TextField, IconButton, DialogTitle, DialogActions } from "@material-ui/core";
-import PropTypes from 'prop-types';
-import { styled } from '@material-ui/styles';
+
+import { useForm } from "react-hook-form";
 
 const style = (theme) => ({
     root: {
@@ -33,52 +32,17 @@ const style = (theme) => ({
 
 
 const Content = ({ classes }) => {
-    const [formSubmitted, setFormSubmitted] = useState(false);
-    const [units, setUnits] = React.useState('');
-    const [layer1, setLayer1] = React.useState('');
-    const [layer2, setLayer2] = React.useState('');
-    const [desirableTemp, setDesirableTemp] = useState("");
-    const [environTemp, setEnvironTemp] = useState("");
-    const [layer1Thickness, setLayer1Thickness] = useState('');
-    const handleChangeLayer1Thickness = (event) => {
-        setLayer1Thickness(event.target.value);
-    };
-    const [layer2Thickness, setLayer2Thickness] = useState('');
-    const handleChangeLayer2Thickness = (event) => {
-        setLayer2Thickness(event.target.value);
-    };
-    const handleChangeUnits = (event) => {
-        setUnits(event.target.value);
-    };
-    const handleChangeLayer1 = (event) => {
-        setLayer1(event.target.value);
-    };
-    const handleChangeLayer2 = (event) => {
-        setLayer2(event.target.value);
-    };
-    const [open, setOpen] = React.useState(false);
+    const { register, handleSubmit } = useForm();
+    const [result, setResult] = useState("");
+    const [result1, setResult1] = useState("");
+    const onSubmit = (data) => {
+        console.log(data)
+        data.time = +data.desirableTemp + +data.environTemp;
+        data.material = "Floor Heater Material"
+        setResult(JSON.stringify(data.time));
+        setResult1(JSON.stringify(data.material));
+    }
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     localStorage.clear();
-    //     setFormSubmitted(true);
-    //     const data = Array.from(e.target.elements)
-    //         .map((el) => el.id)
-    //         .filter(Boolean)
-    //         .reduce((accObj, field) => {
-    //             accObj[field] = e.target.elements[field].value;
-    //             return accObj;
-    //         }, {});
-    //     alert(JSON.stringify(data, null, 2));
-    // };
 
     return (
         <Paper style={{}} elevation={1} className={classes.root}>
@@ -97,98 +61,68 @@ const Content = ({ classes }) => {
                 We'll Suggest you the Best ThermoPad and Time taken to Heat the floor.
             </Typography>
 
+            <form onSubmit={handleSubmit(onSubmit)}>
 
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Temperature Units</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={units}
-                    label="Units"
-                    onChange={handleChangeUnits}
-                >
-                    <MenuItem value={"c"}>Celsius(C)</MenuItem>
-                    <MenuItem value={"f"}>Fahrenheit(F)</MenuItem>
-                    <MenuItem value={"k"}>Kelvin(K)</MenuItem>
-                </Select>
-            </FormControl>
+                <label>
+                    Temperature Units
+                    <select {...register("TemperatureUnits")}>
+                        <option value="">Temperature Units...</option>
+                        <option value="c">Celsius(C)</option>
+                        <option value="k">Kelvin(K)</option>
+                        <option value="f">Fahrenheit (F)</option>
+                    </select>
+                </label>
+                <label>
+                    Desirable temperature
+                    <input type="number" step=".01" defaultValue={25.00} min={0} max={40} {...register("desirableTemp")} placeholder="Desirable Temperature" />
+                </label>
+                <label>
+                    Environmental temperature
+                    <input type="number" step=".01" defaultValue={25.00} min={0} max={40}{...register("environTemp")} placeholder="Environmental Temperature" />
+                </label>
 
-            <FormControl fullWidth>
+                <label>
+                    Layer 1 Material
+                    <select {...register("layer1")}>
+                        <option value="">Layer 1 Material...</option>
+                        <option value="concrete">Concrete</option>
+                        <option value="none">None</option>
 
-                <TextField
-                    label="Desirable Temperature"
-                    type="number"
-                    value={desirableTemp}
-                    variant="outlined"
-                    inputProps={{
-                        maxLength: 40,
-                        step: "1.0"
-                    }}
-                    onChange={(e) => setDesirableTemp(parseFloat(e.target.value).toFixed(1))}
-                />
-            </FormControl>
-            <FormControl fullWidth>
+                    </select>
+                </label>
 
+                <label>
+                    Layer 1 Thickness in MM
+                    <input {...register("layer1Thickness")} placeholder="layer1 Thickness" />
+                </label>
 
-                <TextField
-                    label="Environmental Temperature"
-                    type="number"
-                    value={environTemp}
-                    variant="outlined"
-                    inputProps={{
-                        maxLength: 40,
-                        step: "1.0"
-                    }}
-                    onChange={(e) => setEnvironTemp(parseFloat(e.target.value).toFixed(1))}
-                />
-            </FormControl>
+                <label>
+                    Layer 2 Material
+                    <select {...register("layer2")}>
+                        <option value="">Layer 2 Material...</option>
+                        <option value="concrete">Concrete</option>
+                        <option value="wood">Wood</option>
+                        <option value="tiles">Tiles</option>
+                        <option value="pavers">Pavers</option>
+                    </select>
+                </label>
+                <label>
+                    Layer 2 Thickness in MM
+                    <input {...register("layer2Thickness")} placeholder="layer2 Thickness" />
+                </label>
+                <div>
 
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Layer 1</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={layer1}
-                    label="Layer1"
-                    onChange={handleChangeLayer1}
-                >
-                    <MenuItem value={"concrete"}>Concrete</MenuItem>
-                    <MenuItem value={"none"}>None</MenuItem>
-                    {/* <MenuItem value={"k"}>Kelvin(K)</MenuItem> */}
-                </Select>
-            </FormControl>
-            <TextField
-                id="outlined-name"
-                label="Layer 1 Thickness"
-                value={layer1Thickness}
-                onChange={handleChangeLayer1Thickness}
-            />
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Layer 2</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={layer2}
-                    label="Layer2"
-                    onChange={handleChangeLayer2}
-                >
-                    <MenuItem value={"concrete"}>Concrete</MenuItem>
-                    <MenuItem value={"wood"}>Wood</MenuItem>
-                    <MenuItem value={"tiles"}>Tiles</MenuItem>
-                    <MenuItem value={"pavers"}>Pavers</MenuItem>
-                    {/* <MenuItem value={"k"}>Kelvin(K)</MenuItem> */}
-                </Select>
-                <TextField
-                    id="outlined-name"
-                    label="Layer 2 Thickness"
-                    value={layer2Thickness}
-                    onChange={handleChangeLayer2Thickness}
-                />
-            </FormControl>
+                    <p>Time Takes to Heat : {result}</p>
+                </div>
+                <div>
 
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open dialog
-            </Button>
+                    <p>Suitable Heater Material Pad: {result1}</p>
+                </div>
+                <Button type="submit" variant="contained" primary >
+                    Submit
+                </Button>
+            </form>
+
 
         </Paper>
     );
