@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
-import { Paper, Grid, Typography, withStyles, Button } from "@material-ui/core";
-import WizardHeader from "./wizardHeader";
-import RadioMasters from "./radioMasters";
-// import SelectService from "./selectService";
-import Contacts from "./Contacts";
-import Contacts2 from "./Contacts2";
+import { Paper, Grid, Typography, withStyles, Button, FormControl, InputLabel, Select, MenuItem, TextField, IconButton, DialogTitle, DialogActions } from "@material-ui/core";
+import PropTypes from 'prop-types';
+import { styled } from '@material-ui/styles';
 
 const style = (theme) => ({
     root: {
@@ -32,37 +29,57 @@ const style = (theme) => ({
         boxShadow: theme.shadows[5]
     }
 });
+
+
+
 const Content = ({ classes }) => {
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const [activeStep, setActiveStep] = useState(
-        localStorage.getItem("step") ? Number(localStorage.getItem("step")) : 0
-    );
-    const handleChange = (index) => (e) => {
-        setActiveStep(index);
-        localStorage.setItem("step", index);
+    const [units, setUnits] = React.useState('');
+    const [layer1, setLayer1] = React.useState('');
+    const [layer2, setLayer2] = React.useState('');
+    const [desirableTemp, setDesirableTemp] = useState("");
+    const [environTemp, setEnvironTemp] = useState("");
+    const [layer1Thickness, setLayer1Thickness] = useState('');
+    const handleChangeLayer1Thickness = (event) => {
+        setLayer1Thickness(event.target.value);
     };
-    const nandleNext = () => {
-        setActiveStep(activeStep + 1);
-        localStorage.setItem("step", activeStep + 1);
+    const [layer2Thickness, setLayer2Thickness] = useState('');
+    const handleChangeLayer2Thickness = (event) => {
+        setLayer2Thickness(event.target.value);
     };
-    const nandlePrev = () => {
-        setActiveStep(activeStep - 1);
-        localStorage.setItem("step", activeStep - 1);
+    const handleChangeUnits = (event) => {
+        setUnits(event.target.value);
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        localStorage.clear();
-        setFormSubmitted(true);
-        const data = Array.from(e.target.elements)
-            .map((el) => el.id)
-            .filter(Boolean)
-            .reduce((accObj, field) => {
-                accObj[field] = e.target.elements[field].value;
-                return accObj;
-            }, {});
-        alert(JSON.stringify(data, null, 2));
+    const handleChangeLayer1 = (event) => {
+        setLayer1(event.target.value);
     };
-    const tabs = ["Temperature", "Layers", "Suggestions"];
+    const handleChangeLayer2 = (event) => {
+        setLayer2(event.target.value);
+    };
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     localStorage.clear();
+    //     setFormSubmitted(true);
+    //     const data = Array.from(e.target.elements)
+    //         .map((el) => el.id)
+    //         .filter(Boolean)
+    //         .reduce((accObj, field) => {
+    //             accObj[field] = e.target.elements[field].value;
+    //             return accObj;
+    //         }, {});
+    //     alert(JSON.stringify(data, null, 2));
+    // };
+
     return (
         <Paper style={{}} elevation={1} className={classes.root}>
             <Typography
@@ -79,65 +96,100 @@ const Content = ({ classes }) => {
             <Typography gutterBottom>
                 We'll Suggest you the Best ThermoPad and Time taken to Heat the floor.
             </Typography>
-            <WizardHeader
-                tabs={tabs}
-                activeStep={activeStep}
-                handleChange={handleChange}
-                formSubmitted={formSubmitted}
-            />
 
-            <form onSubmit={handleSubmit}>
-                <SwipeableViews index={activeStep} onChangeIndex={handleChange}>
-                    <RadioMasters />
 
-                    <Contacts />
-                    <Contacts2 />
-                    {/* <SelectService /> */}
-                </SwipeableViews>
-                <Grid
-                    container
-                    justify="space-between"
-                    style={{ padding: "16px 16px" }}
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Temperature Units</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={units}
+                    label="Units"
+                    onChange={handleChangeUnits}
                 >
-                    <Grid item>
-                        <Button
-                            disabled={activeStep === 0 || formSubmitted}
-                            onClick={nandlePrev}
-                            variant="contained"
-                            color="default"
-                            className={`${classes.navigation} ${classes.prevBtn}`}
-                        >
-                            Back
-                        </Button>
-                    </Grid>
-                    {activeStep < tabs.length - 1 && (
-                        <Grid item>
-                            <Button
-                                color="primary"
-                                className={classes.navigation}
-                                variant="contained"
-                                onClick={nandleNext}
-                                disabled={formSubmitted}
-                            >
-                                Next
-                            </Button>
-                        </Grid>
-                    )}
-                    {activeStep === tabs.length - 1 && (
-                        <Grid item>
-                            <Button
-                                type="submit"
-                                color="primary"
-                                className={classes.navigation}
-                                variant="contained"
-                                disabled={formSubmitted}
-                            >
-                                Submit
-                            </Button>
-                        </Grid>
-                    )}
-                </Grid>
-            </form>
+                    <MenuItem value={"c"}>Celsius(C)</MenuItem>
+                    <MenuItem value={"f"}>Fahrenheit(F)</MenuItem>
+                    <MenuItem value={"k"}>Kelvin(K)</MenuItem>
+                </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+
+                <TextField
+                    label="Desirable Temperature"
+                    type="number"
+                    value={desirableTemp}
+                    variant="outlined"
+                    inputProps={{
+                        maxLength: 40,
+                        step: "1.0"
+                    }}
+                    onChange={(e) => setDesirableTemp(parseFloat(e.target.value).toFixed(1))}
+                />
+            </FormControl>
+            <FormControl fullWidth>
+
+
+                <TextField
+                    label="Environmental Temperature"
+                    type="number"
+                    value={environTemp}
+                    variant="outlined"
+                    inputProps={{
+                        maxLength: 40,
+                        step: "1.0"
+                    }}
+                    onChange={(e) => setEnvironTemp(parseFloat(e.target.value).toFixed(1))}
+                />
+            </FormControl>
+
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Layer 1</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={layer1}
+                    label="Layer1"
+                    onChange={handleChangeLayer1}
+                >
+                    <MenuItem value={"concrete"}>Concrete</MenuItem>
+                    <MenuItem value={"none"}>None</MenuItem>
+                    {/* <MenuItem value={"k"}>Kelvin(K)</MenuItem> */}
+                </Select>
+            </FormControl>
+            <TextField
+                id="outlined-name"
+                label="Layer 1 Thickness"
+                value={layer1Thickness}
+                onChange={handleChangeLayer1Thickness}
+            />
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Layer 2</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={layer2}
+                    label="Layer2"
+                    onChange={handleChangeLayer2}
+                >
+                    <MenuItem value={"concrete"}>Concrete</MenuItem>
+                    <MenuItem value={"wood"}>Wood</MenuItem>
+                    <MenuItem value={"tiles"}>Tiles</MenuItem>
+                    <MenuItem value={"pavers"}>Pavers</MenuItem>
+                    {/* <MenuItem value={"k"}>Kelvin(K)</MenuItem> */}
+                </Select>
+                <TextField
+                    id="outlined-name"
+                    label="Layer 2 Thickness"
+                    value={layer2Thickness}
+                    onChange={handleChangeLayer2Thickness}
+                />
+            </FormControl>
+
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Open dialog
+            </Button>
+
         </Paper>
     );
 };
