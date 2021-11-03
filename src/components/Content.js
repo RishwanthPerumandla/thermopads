@@ -74,11 +74,11 @@ const Content = ({ classes }) => {
                 </label>
                 <label>
                     Desirable temperature
-                    <input type="number" step=".1" defaultValue={} min={} max={} {...register("desirableTemp")} placeholder="Desirable Temperature" />
+                    <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" />
                 </label>
                 <label>
                     Environmental temperature
-                    <input type="number" step=".1" defaultValue={} min={} max={}{...register("environTemp")} placeholder="Environmental Temperature" />
+                    <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" />
                 </label>
 
                 <label>
