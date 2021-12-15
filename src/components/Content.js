@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Paper, Grid, Typography, withStyles, Button, FormControl, InputLabel, Select, MenuItem, TextField, IconButton, DialogTitle, DialogActions } from "@material-ui/core";
 
 import { useForm } from "react-hook-form";
+import Algorithm from './Algorithm';
+
 
 const style = (theme) => ({
     root: {
@@ -31,16 +33,21 @@ const style = (theme) => ({
 
 
 
-const Content = ({ classes }) => {
+const Content =  ({ classes }) => {
     const { register, handleSubmit } = useForm();
     const [result, setResult] = useState("");
     const [result1, setResult1] = useState("");
-    const onSubmit = (data) => {
-        console.log(data)
-        data.time = +data.desirableTemp + +data.environTemp;
-        data.material = "Floor Heater Material"
+    const onSubmit = async (data) => {
+        // console.log(data)
+
+        const Q2 = await Algorithm(data);
+
+        data.time = Q2.T ;
+        data.HeatDissipated = Q2.Q;
+
+        // data.material = "Floor Heater Material"
         setResult(JSON.stringify(data.time));
-        setResult1(JSON.stringify(data.material));
+        setResult1(JSON.stringify(data.HeatDissipated));
     }
 
 
@@ -68,8 +75,8 @@ const Content = ({ classes }) => {
                     <select {...register("TemperatureUnits")}>
                         <option value="">Temperature Units...</option>
                         <option value="c">Celsius(C)</option>
-                        <option value="k">Kelvin(K)</option>
-                        <option value="f">Fahrenheit (F)</option>
+                        {/* <option value="k">Kelvin(K)</option> */}
+                        {/* <option value="f">Fahrenheit (F)</option> */}
                     </select>
                 </label>
                 <label>
