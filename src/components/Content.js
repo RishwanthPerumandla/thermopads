@@ -33,21 +33,43 @@ const style = (theme) => ({
 
 
 
-const Content =  ({ classes }) => {
+const Content = ({ classes }) => {
     const { register, handleSubmit } = useForm();
     const [result, setResult] = useState("");
     const [result1, setResult1] = useState("");
+    const [result2, setResult2] = useState("");
+    const [result3, setResult3] = useState("");
+    const [result4, setResult4] = useState("");
+    const [result5, setResult5] = useState("");
+    const [result6, setResult6] = useState("");
+    const [result7, setResult7] = useState("");
+    const [result8, setResult8] = useState("");
+    const [result9, setResult9] = useState("");
     const onSubmit = async (data) => {
         // console.log(data)
 
         const Q2 = await Algorithm(data);
 
-        data.time = Q2.T ;
+        data.time = Q2.T;
         data.HeatDissipated = Q2.Q;
-
+        data.Gri = Q2.Gri;
+        data.Pri = Q2.Pri;
+        data.Nui = Q2.Nui;
+        data.hi = Q2.hi;
+        data.Gro = Q2.Gro;
+        data.Pro = Q2.Pro;
+        data.ho = Q2.ho;
         // data.material = "Floor Heater Material"
         setResult(JSON.stringify(data.time));
         setResult1(JSON.stringify(data.HeatDissipated));
+        setResult2(JSON.stringify(data.Gri));
+        setResult3(JSON.stringify(data.Pri));
+        setResult4(JSON.stringify(data.Nui));
+        setResult5(JSON.stringify(data.hi));
+        setResult6(JSON.stringify(data.Gro));
+        setResult7(JSON.stringify(data.Pro));
+        setResult8(JSON.stringify(data.Nuo));
+        setResult9(JSON.stringify(data.ho));
     }
 
 
@@ -120,10 +142,19 @@ const Content =  ({ classes }) => {
                 <div>
 
                     <p>Time Takes to Heat : {result}</p>
+                    <p>Heat dissipated by conduction and convection: {result1}</p>
+                    <p>Gri: {result2}</p>
+                    <p>Pri: {result3}</p>
+                    <p>Nui: {result4}</p>
+                    <p>hi: {result5}</p>
+                    <p>Gro: {result6}</p>
+                    <p>Pro: {result7}</p>
+                    <p>Nuo: {result8}</p>
+                    <p>ho: {result9}</p>
                 </div>
                 <div>
 
-                    <p>Heat dissipated by conduction and convection: {result1}</p>
+                    {/* <p>Heat dissipated by conduction and convection: {result1}</p> */}
                 </div>
                 <Button type="submit" variant="contained" primary >
                     Submit
