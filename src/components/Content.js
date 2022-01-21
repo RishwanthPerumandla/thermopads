@@ -123,7 +123,7 @@ const Content =  ({ classes }) => {
                 </div>
                 <div>
 
-                    <p>Suitable Heater Material Pad: {result1}</p>
+                    <p>Heat dissipated by conduction and convection: {result1}</p>
                 </div>
                 <Button type="submit" variant="contained" primary >
                     Submit
