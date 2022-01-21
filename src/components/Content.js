@@ -58,6 +58,7 @@ const Content = ({ classes }) => {
         data.hi = Q2.hi;
         data.Gro = Q2.Gro;
         data.Pro = Q2.Pro;
+        data.Nuo = Q2.Nuo;
         data.ho = Q2.ho;
         // data.material = "Floor Heater Material"
         setResult(JSON.stringify(data.time));

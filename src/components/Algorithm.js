@@ -83,7 +83,7 @@ const Algorithm = async (data) => {
 
   let ho = Nuo * ko / l;
 
-  let ab = (1 / hi) + (Number((data.layer1Thickness / 1000)) / k1) + (Number(data.layer2Thickness) / k2) + (1 / ho);
+  let ab = (1 / hi) + (Number((data.layer1Thickness / 1000)) / k1) + (Number((data.layer2Thickness / 1000)) / k2) + (1 / ho);
 
   // Calculating U
   const result = 1 / ab;
