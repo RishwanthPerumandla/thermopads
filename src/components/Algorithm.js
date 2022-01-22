@@ -30,6 +30,12 @@ const l = 1;
 
 
 const Algorithm = async (data) => {
+
+  //x1,x2 in Meters
+  let x1 = data.layer1Thickness / 1000;
+  let x2 = data.layer2Thickness / 1000;
+
+
   //k1, k2 values
   let k1Value = FlooringMaterials.find(o => o.material === data.layer1)
   let k1 = k1Value.k;
@@ -83,7 +89,7 @@ const Algorithm = async (data) => {
 
   let ho = Nuo * ko / l;
 
-  let ab = (1 / hi) + (Number((data.layer1Thickness / 1000)) / k1) + (Number((data.layer2Thickness / 1000)) / k2) + (1 / ho);
+  let ab = (1 / hi) + (Number(x1) / k1) + (Number(x2) / k2) + (1 / ho);
 
   // Calculating U
   const result = 1 / ab;
@@ -97,7 +103,7 @@ const Algorithm = async (data) => {
 
 
   //Calculating Time
-  const T1 = (1 / ho) * p * c * ((data.layer1Thickness / 1000) + (data.layer2Thickness / 1000)) / 2;
+  const T1 = (1 / ho) * p * c * (x1 + x2) / 2;
   const T2 = Math.log((Number(data.desirableTemp) - Number(data.environTemp)) / 5)
   const T = T1 * T2;
 

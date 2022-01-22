@@ -31,7 +31,17 @@ const style = (theme) => ({
     }
 });
 
+function secondsToHms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
 
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay;
+}
 
 const Content = ({ classes }) => {
     const { register, handleSubmit } = useForm();
@@ -50,7 +60,7 @@ const Content = ({ classes }) => {
 
         const Q2 = await Algorithm(data);
 
-        data.time = Q2.T;
+        data.time = secondsToHms(Q2.T);
         data.HeatDissipated = Q2.Q;
         data.Gri = Q2.Gri;
         data.Pri = Q2.Pri;
@@ -138,7 +148,7 @@ const Content = ({ classes }) => {
                 </label>
                 <label>
                     Layer 2 Thickness in MM
-                    <input {...register("layer2Thickness")} placeholder="layer2 Thickness" />
+                    <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" />
                 </label>
                 <div>
 
@@ -148,13 +158,13 @@ const Content = ({ classes }) => {
                     <p>Pri: {result3}</p>
                     <p>Nui: {result4}</p>
                     <p>hi: {result5}</p>
+
+                </div>
+                <div>
                     <p>Gro: {result6}</p>
                     <p>Pro: {result7}</p>
                     <p>Nuo: {result8}</p>
                     <p>ho: {result9}</p>
-                </div>
-                <div>
-
                     {/* <p>Heat dissipated by conduction and convection: {result1}</p> */}
                 </div>
                 <Button type="submit" variant="contained" primary >
