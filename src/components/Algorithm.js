@@ -40,10 +40,16 @@ const Algorithm = async (data) => {
   //k1, k2 values
   let k1Value = FlooringMaterials.find(o => o.material === data.layer1)
   let k1 = k1Value.k;
-  let k2Value = FlooringMaterials.find(o => o.material === data.layer2)
-  let k2 = k2Value.k;
-  let p = k2Value.p;
-  let c = k2Value.c;
+  let p = k1Value.p;
+  let c = k1Value.c;
+  let k2;
+  if (data.layer2 === "none") {
+    k2 = 1
+  } else {
+    let k2Value = FlooringMaterials.find(o => o.material === data.layer2)
+    console.log("k2Value: " + k2Value.c);
+    k2 = k2Value.k;
+  }
 
 
   //calculatuing hi
@@ -55,7 +61,7 @@ const Algorithm = async (data) => {
   }
   let Tf11 = Math.round(Tf1);
   let TableValues1 = airProperties.find(o => o.tf === (Tf11 * 10));
-  console.log(TableValues1)
+  // console.log(TableValues1)
   let ki = TableValues1.k;
   let vi = TableValues1.v;
   let Pri = TableValues1.pr;

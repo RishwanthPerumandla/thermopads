@@ -72,9 +72,17 @@ const Content = ({ classes }) => {
         data.Nuo = Q2.Nuo;
         data.ho = Q2.ho;
         data.U = Q2.U;
+
+        if (data.HeatDissipated < 80) {
+            setResult1(JSON.stringify("100Watt"));
+        } else if (80 < data.HeatDissipated < 130) {
+            setResult1(JSON.stringify("150Watt"));
+        } else if (130 < data.HeatDissipated < 180) {
+            setResult1(JSON.stringify("200Watt"));
+        }
         // data.material = "Floor Heater Material"
         setResult(JSON.stringify(data.time));
-        setResult1(JSON.stringify(data.HeatDissipated));
+
         setResult2(JSON.stringify(data.Gri));
         setResult3(JSON.stringify(data.Pri));
         setResult4(JSON.stringify(data.Nui));
@@ -129,6 +137,9 @@ const Content = ({ classes }) => {
                     <select {...register("layer1")}>
                         <option value="">Layer 1 Material...</option>
                         <option value="concrete">Concrete</option>
+                        <option value="wood">Wood</option>
+                        <option value="tiles">Tiles</option>
+                        <option value="pavers">Pavers</option>
                         <option value="none">None</option>
 
                     </select>
@@ -147,6 +158,7 @@ const Content = ({ classes }) => {
                         <option value="wood">Wood</option>
                         <option value="tiles">Tiles</option>
                         <option value="pavers">Pavers</option>
+                        <option value="none">None</option>
                     </select>
                 </label>
                 <label>
@@ -157,18 +169,18 @@ const Content = ({ classes }) => {
 
                     <p>Time Takes to Heat : {result}</p>
                     <p>Recommended Wattage for Mat: {result1}</p>
-                    <p>U: {result11}</p>
+                    {/* <p>U: {result11}</p>
                     <p>Gri: {result2}</p>
                     <p>Pri: {result3}</p>
                     <p>Nui: {result4}</p>
-                    <p>hi: {result5}</p>
+                    <p>hi: {result5}</p> */}
 
                 </div>
                 <div>
-                    <p>Gro: {result6}</p>
+                    {/* <p>Gro: {result6}</p>
                     <p>Pro: {result7}</p>
                     <p>Nuo: {result8}</p>
-                    <p>ho: {result9}</p>
+                    <p>ho: {result9}</p> */}
                     {/* <p>Heat dissipated by conduction and convection: {result1}</p> */}
                 </div>
                 <Button type="submit" variant="contained" primary >
