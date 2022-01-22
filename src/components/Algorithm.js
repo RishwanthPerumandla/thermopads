@@ -34,7 +34,8 @@ const Algorithm = async (data) => {
   //x1,x2 in Meters
   let x1 = data.layer1Thickness / 1000;
   let x2 = data.layer2Thickness / 1000;
-
+  let surfaceTempCable = 90
+  // let surfaceTempGround
 
   //k1, k2 values
   let k1Value = FlooringMaterials.find(o => o.material === data.layer1)
@@ -97,7 +98,7 @@ const Algorithm = async (data) => {
 
 
   let A = 1;
-  let dT = (data.desirableTemp - data.environTemp);
+  let dT = (surfaceTempCable - data.environTemp);
   const U = result;
   const Q = U * A * dT;
 
@@ -107,7 +108,7 @@ const Algorithm = async (data) => {
   const T2 = Math.log((Number(data.desirableTemp) - Number(data.environTemp)) / 5)
   const T = T1 * T2;
 
-  const values = { Q, T, Gri, Pri, Nui, hi, Gro, Pro, Nuo, ho, }
+  const values = { Q, T, U, Gri, Pri, Nui, hi, Gro, Pro, Nuo, ho, }
 
   return values;
 }

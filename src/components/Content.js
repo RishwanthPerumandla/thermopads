@@ -55,6 +55,7 @@ const Content = ({ classes }) => {
     const [result7, setResult7] = useState("");
     const [result8, setResult8] = useState("");
     const [result9, setResult9] = useState("");
+    const [result11, setResult11] = useState("");
     const onSubmit = async (data) => {
         // console.log(data)
 
@@ -70,6 +71,7 @@ const Content = ({ classes }) => {
         data.Pro = Q2.Pro;
         data.Nuo = Q2.Nuo;
         data.ho = Q2.ho;
+        data.U = Q2.U;
         // data.material = "Floor Heater Material"
         setResult(JSON.stringify(data.time));
         setResult1(JSON.stringify(data.HeatDissipated));
@@ -81,6 +83,7 @@ const Content = ({ classes }) => {
         setResult7(JSON.stringify(data.Pro));
         setResult8(JSON.stringify(data.Nuo));
         setResult9(JSON.stringify(data.ho));
+        setResult11(JSON.stringify(data.U));
     }
 
 
@@ -153,7 +156,8 @@ const Content = ({ classes }) => {
                 <div>
 
                     <p>Time Takes to Heat : {result}</p>
-                    <p>Heat dissipated by conduction and convection: {result1}</p>
+                    <p>Recommended Wattage for Mat: {result1}</p>
+                    <p>U: {result11}</p>
                     <p>Gri: {result2}</p>
                     <p>Pri: {result3}</p>
                     <p>Nui: {result4}</p>
