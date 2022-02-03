@@ -2,9 +2,10 @@
   /* position: relative; */
   font-family: sans-serif;
   text-align: center;
+  background: #ffffff;
 
   min-height: 100vh;
-  background-image: url('https://images.pexels.com/photos/221047/pexels-photo-221047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  /* background-image: url('https://images.pexels.com/photos/221047/pexels-photo-221047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); */
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -28,8 +29,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 800px;
-  margin: 0 auto;
+  /* max-width: 800px; */
+  margin: 100 auto;
   padding: 0;
   z-index: 2;
   pointer-events: all;
@@ -148,4 +149,7 @@ input[type='submit']:active {
 
 .preact:hover {
   opacity: 1;
+}
+.MuiAppBar-colorPrimary {
+  background-color: '#fff';
 }
