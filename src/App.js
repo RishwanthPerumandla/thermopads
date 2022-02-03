@@ -15,7 +15,7 @@ function App() {
       <Container maxWidth="lg">
         <Nav />
         <main>
-          <Grid container spacing={5} sx={{ mt: 3 }}>
+          {/* <Grid container spacing={5} sx={{ mt: 3 }}>
             <Grid item xs={12} sm={6}>
               <Design />
             </Grid>
@@ -24,9 +24,20 @@ function App() {
                 <img src={require("./images/convection.png")} />
               </div>
             </Grid>
-          </Grid>
+          </Grid> */}
+          <Design />
+          <Container maxWidth="lg" className='footer' >
+            <Grid xs={12} sm={12}>
+              <div>
+                <center>
+                  Designed & Developed by <a href="https://www.rishwanth.com">Rishwanth Perumandla</a>
+                </center>
 
+              </div>
+            </Grid>
+          </Container>
         </main>
+
       </Container>
 
     </ThemeProvider>

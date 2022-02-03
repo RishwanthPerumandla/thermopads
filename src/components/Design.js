@@ -75,97 +75,110 @@ const Design = () => {
     }
 
     return <div>
-        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-            <Container >
-                {/* <FormControl> */}
-                <Grid container spacing={6} >
+        {(result !== "" && result1 !== "") &&
+            <div>
+                <Grid container spacing={4}>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Desirable Temperature" id="outlined-required" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" />
-                        {/* <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" /> */}
+                        <h4>Time Takes to Heat : {result}</h4>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Environment Temperature" id="outlined-required" type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" />
-                        {/* <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" /> */}
+                        <h4>Recommended Wattage for Mat: {result1} </h4>
                     </Grid>
                 </Grid>
-                <br />
-                <Grid container spacing={6}>
-                    <Grid item xs={12} sm={6}>
-                        <InputLabel id="demo-simple-select-label">Layer 1 Material</InputLabel>
-                        <Select
-                            placeholder='Layer 1 Material'
-                            id="demo-simple-select"
-                            {...register("layer1")}
-                            label="Layer 1 Material"
-                            fullWidth
-                        >
-                            <MenuItem value={"concrete"}>Concrete</MenuItem>
-                            <MenuItem value={"wood"}>Wood</MenuItem>
-                            <MenuItem value={"tiles"}>Tiles</MenuItem>
-                            <MenuItem value={"pavers"}>Pavers</MenuItem>
-                            <MenuItem value={"none"}>None</MenuItem>
+            </div>}
+        <Grid container spacing={5} sx={{ mt: 3 }}>
 
-                        </Select>
+            <Grid item xs={12} sm={6}>
+                <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+                    <Container >
+                        {/* <FormControl> */}
+                        <Grid container spacing={6} >
+                            <Grid item xs={12} sm={6}>
+                                <TextField label="Desirable Temperature" id="outlined-required" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" />
+                                {/* <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" /> */}
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField label="Environment Temperature" id="outlined-required" type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" />
+                                {/* <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" /> */}
+                            </Grid>
+                        </Grid>
+                        <br />
+                        <Grid container spacing={6}>
+                            <Grid item xs={12} sm={6}>
+                                <InputLabel id="demo-simple-select-label">Layer 1 Material</InputLabel>
+                                <Select
+                                    placeholder='Layer 1 Material'
+                                    id="demo-simple-select"
+                                    {...register("layer1")}
+                                    label="Layer 1 Material"
+                                    fullWidth
+                                >
+                                    <MenuItem value={"concrete"}>Concrete</MenuItem>
+                                    <MenuItem value={"wood"}>Wood</MenuItem>
+                                    <MenuItem value={"tiles"}>Tiles</MenuItem>
+                                    <MenuItem value={"pavers"}>Pavers</MenuItem>
+                                    <MenuItem value={"none"}>None</MenuItem>
 
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <InputLabel id="demo-simple-select-label">Layer 1 Thickness in MM</InputLabel>
-                        <TextField label="layer1 Thickness" id="outlined-number"  {...register("layer1Thickness")} placeholder="Layer 1 Thickness in MM" />
+                                </Select>
 
-                        {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
-                    </Grid>
-                </Grid>
-                <br />
-                <br />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <InputLabel id="demo-simple-select-label">Layer 1 Thickness in MM</InputLabel>
+                                <TextField label="layer1 Thickness" id="outlined-number"  {...register("layer1Thickness")} placeholder="Layer 1 Thickness in MM" />
 
-                <Grid container spacing={6} >
-                    <Grid item xs={12} sm={6}>
-                        <InputLabel id="demo-simple-select-label">Layer 2 Material</InputLabel>
-                        <Select
-                            placeholder='Layer 1 Material'
-                            id="demo-simple-select"
-                            {...register("layer2")}
-                            input={<OutlinedInput />}
-                            label="Layer 2 Material"
-                            fullWidth
-                        >
-                            <MenuItem value={"concrete"}>Concrete</MenuItem>
-                            <MenuItem value={"wood"}>Wood</MenuItem>
-                            <MenuItem value={"tiles"}>Tiles</MenuItem>
-                            <MenuItem value={"pavers"}>Pavers</MenuItem>
-                            <MenuItem value={"none"}>None</MenuItem>
+                                {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
+                            </Grid>
+                        </Grid>
+                        <br />
+                        <br />
 
-                        </Select>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <InputLabel id="demo-simple-select-label">Layer 2 Thickness in MM</InputLabel>
+                        <Grid container spacing={6} >
+                            <Grid item xs={12} sm={6}>
+                                <InputLabel id="demo-simple-select-label">Layer 2 Material</InputLabel>
+                                <Select
+                                    placeholder='Layer 1 Material'
+                                    id="demo-simple-select"
+                                    {...register("layer2")}
+                                    input={<OutlinedInput />}
+                                    label="Layer 2 Material"
+                                    fullWidth
+                                >
+                                    <MenuItem value={"concrete"}>Concrete</MenuItem>
+                                    <MenuItem value={"wood"}>Wood</MenuItem>
+                                    <MenuItem value={"tiles"}>Tiles</MenuItem>
+                                    <MenuItem value={"pavers"}>Pavers</MenuItem>
+                                    <MenuItem value={"none"}>None</MenuItem>
 
-                        <TextField label="Layer2 Thickness" id="outlined-number"
-                            default={0}  {...register("layer2Thickness")} placeholder="Layer 2 Thickness in MM" />
+                                </Select>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <InputLabel id="demo-simple-select-label">Layer 2 Thickness in MM</InputLabel>
 
-                        {/* <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" /> */}
-                    </Grid>
-                </Grid>
+                                <TextField label="Layer2 Thickness" id="outlined-number"
+                                    default={0}  {...register("layer2Thickness")} placeholder="Layer 2 Thickness in MM" />
 
-                <br />
-                <br />
+                                {/* <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" /> */}
+                            </Grid>
+                        </Grid>
 
-                <Button type="submit" variant="contained" primary  >
-                    Submit
-                </Button>
+                        <br />
+                        <br />
+
+                        <Button type="submit" variant="contained" primary  >
+                            Submit
+                        </Button>
+
+                        {/* </FormControl> */}
+                    </Container>
+                </form>
+            </Grid>
+            <Grid item xs={12} sm={6}>
                 <div>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6}>
-                            <p>Time Takes to Heat : {result}</p>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <p>Recommended Wattage for Mat: {result1}</p>
-                        </Grid>
-                    </Grid>
+                    <img src={require("../images/convection.png")} />
                 </div>
-                {/* </FormControl> */}
-            </Container>
-        </form>
+            </Grid>
+        </Grid>
+
 
     </div >;
 };
