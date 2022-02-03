@@ -7,10 +7,55 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-const theme = createTheme();
+const theme = createTheme({
+  overrides: {
+    MuiInput: {
+      root: {
+        color: "white",
+        backgroundColor: "fuchsia",
+        "&.Mui-focused": {
+          color: "orange",
+          backgroundColor: "pink"
+        },
+        "&:before": {
+          borderBottomColor: "blue"
+        },
+        "&:hover:not(.Mui-focused):before": {
+          borderBottomColor: "green"
+        },
+        "&:after": {
+          // focused
+          borderBottomColor: "purple"
+        }
+      },
+      input: {
+        "&::selection": {
+          backgroundColor: "lightgreen",
+          color: "black"
+        }
+      }
+    },
+    MuiInputLabel: {
+      root: {
+        color: "brown",
+        "&.Mui-focused": {
+          color: "aqua"
+        }
+      }
+    }
+  }
+});
 function App() {
   return (
+
     <ThemeProvider theme={theme}>
+      <div className="ripple-background">
+        <div className="circle xxlarge shade1"></div>
+        <div className="circle xlarge shade2"></div>
+        <div className="circle large shade3"></div>
+        <div className="circle mediun shade4"></div>
+        <div className="circle small shade5"></div>
+      </div>
       <CssBaseline />
       <Container maxWidth="lg">
         <Nav />
@@ -30,7 +75,7 @@ function App() {
             <Grid xs={12} sm={12}>
               <div>
                 <center>
-                  Designed & Developed by <a href="https://www.rishwanth.com">Rishwanth Perumandla</a>
+                  Designed & Developed by <a href="https://www.rishwanth.com">Rishwanth Perumandla @Griet</a>
                 </center>
 
               </div>
@@ -41,6 +86,7 @@ function App() {
       </Container>
 
     </ThemeProvider>
+
   );
 }
 
