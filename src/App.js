@@ -8,43 +8,9 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
-  overrides: {
-    MuiInput: {
-      root: {
-        color: "white",
-        backgroundColor: "fuchsia",
-        "&.Mui-focused": {
-          color: "orange",
-          backgroundColor: "pink"
-        },
-        "&:before": {
-          borderBottomColor: "blue"
-        },
-        "&:hover:not(.Mui-focused):before": {
-          borderBottomColor: "green"
-        },
-        "&:after": {
-          // focused
-          borderBottomColor: "purple"
-        }
-      },
-      input: {
-        "&::selection": {
-          backgroundColor: "lightgreen",
-          color: "black"
-        }
-      }
-    },
-    MuiInputLabel: {
-      root: {
-        color: "brown",
-        "&.Mui-focused": {
-          color: "aqua"
-        }
-      }
-    }
-  }
+
 });
+
 function App() {
   return (
 
@@ -71,8 +37,15 @@ function App() {
             </Grid>
           </Grid> */}
           <Design />
+
           <Container maxWidth="lg" className='footer' >
             <Grid xs={12} sm={12}>
+              <div size="small">
+                <center>
+                  <img src={require("./images/thermopadslogo.png")} />
+                </center>
+
+              </div>
               <div>
                 <center>
                   Designed & Developed by <a href="https://www.rishwanth.com">Rishwanth Perumandla @Griet</a>
@@ -80,6 +53,7 @@ function App() {
 
               </div>
             </Grid>
+
           </Container>
         </main>
 

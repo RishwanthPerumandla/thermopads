@@ -10,6 +10,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
+import InputAdornment from '@mui/material/InputAdornment';
+
+
+
 
 function secondsToHms(d) {
     d = Number(d);
@@ -24,6 +30,8 @@ function secondsToHms(d) {
 }
 
 const Design = () => {
+    // const classes = useStyles();
+
     const { register, handleSubmit } = useForm();
     const [result, setResult] = useState("");
     const [result1, setResult1] = useState("");
@@ -75,17 +83,7 @@ const Design = () => {
     }
 
     return <div>
-        {(result !== "" && result1 !== "") &&
-            <div>
-                <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6}>
-                        <h4>Time Takes to Heat : {result}</h4>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <h4>Recommended Wattage for Mat: {result1} </h4>
-                    </Grid>
-                </Grid>
-            </div>}
+
         <Grid container spacing={5} sx={{ mt: 3 }}>
 
             <Grid item xs={12} sm={6}>
@@ -94,11 +92,13 @@ const Design = () => {
                         {/* <FormControl> */}
                         <Grid container spacing={6} >
                             <Grid item xs={12} sm={6}>
-                                <TextField label="Desirable Temperature" id="outlined-required" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" />
+                                <InputLabel id="demo-simple-select-label">Desirable Temperature</InputLabel>
+                                <OutlinedInput label="Desirable Temperature" id="outlined-number" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
                                 {/* <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" /> */}
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField label="Environment Temperature" id="outlined-required" type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" />
+                                <InputLabel id="demo-simple-select-label">Environment Temperature</InputLabel>
+                                <OutlinedInput label="Environment Temperature" id="outlined-number" type="number" step=".1"{...register("environTemp")} endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
                                 {/* <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" /> */}
                             </Grid>
                         </Grid>
@@ -111,6 +111,7 @@ const Design = () => {
                                     id="demo-simple-select"
                                     {...register("layer1")}
                                     label="Layer 1 Material"
+                                    input={<OutlinedInput />}
                                     fullWidth
                                 >
                                     <MenuItem value={"concrete"}>Concrete</MenuItem>
@@ -124,7 +125,7 @@ const Design = () => {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <InputLabel id="demo-simple-select-label">Layer 1 Thickness in MM</InputLabel>
-                                <TextField label="layer1 Thickness" id="outlined-number"  {...register("layer1Thickness")} placeholder="Layer 1 Thickness in MM" />
+                                <OutlinedInput id="outlined-number"  {...register("layer1Thickness")} placeholder="Layer 1 Thickness in MM" />
 
                                 {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
                             </Grid>
@@ -154,7 +155,7 @@ const Design = () => {
                             <Grid item xs={12} sm={6}>
                                 <InputLabel id="demo-simple-select-label">Layer 2 Thickness in MM</InputLabel>
 
-                                <TextField label="Layer2 Thickness" id="outlined-number"
+                                <TextField focusColor='grey' id="outlined-basic" variant="outlined"
                                     default={0}  {...register("layer2Thickness")} placeholder="Layer 2 Thickness in MM" />
 
                                 {/* <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" /> */}
@@ -172,6 +173,7 @@ const Design = () => {
                     </Container>
                 </form>
             </Grid>
+
             <Grid item xs={12} sm={6}>
                 <div>
                     <img src={require("../images/convection.png")} />
@@ -179,7 +181,17 @@ const Design = () => {
             </Grid>
         </Grid>
 
-
+        {(result !== "" && result1 !== "") &&
+            <div>
+                <Grid container spacing={4}>
+                    <Grid item xs={12} sm={6}>
+                        <h4>Time Takes to Heat : {result}</h4>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <h4>Recommended Wattage for Mat: {result1} </h4>
+                    </Grid>
+                </Grid>
+            </div>}
     </div >;
 };
 
