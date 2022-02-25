@@ -182,17 +182,21 @@ const Design1 = () => {
                     </div>
                 </Item>
                 <Item >
-                    {(result !== "" && result1 !== "") &&
-                        <div sx={{ pt: 6 }}>
-                            <Grid container spacing={4}>
-                                <Grid item xs={12} sm={12}>
-                                    <h3>Time Takes to Heat : <b>{result}</b></h3>
+                    <div>
+                        Result:
+                        {(result !== "" && result1 !== "") &&
+                            <div sx={{ pt: 6 }}>
+                                <Grid container spacing={4}>
+                                    <Grid item xs={12} sm={12}>
+                                        <h3>Time Takes to Heat : <b>{result}</b></h3>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12}>
+                                        <h3>Recommended Wattage for Mat: <b>{result1}</b> </h3>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <h3>Recommended Wattage for Mat: <b>{result1}</b> </h3>
-                                </Grid>
-                            </Grid>
-                        </div>}
+                            </div>}
+                    </div>
+
                 </Item>
             </Box>
         </form>
