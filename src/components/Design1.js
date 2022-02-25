@@ -62,11 +62,10 @@ const Design1 = () => {
     const { register, handleSubmit } = useForm();
     const [result, setResult] = useState("");
     const [result1, setResult1] = useState("");
+    const [result2, setResult2] = useState("");
     const onSubmit = async (data) => {
         console.log(data)
-
         const Q2 = await Algorithm(data);
-
         data.time = secondsToHms(Q2.T);
         data.HeatDissipated = Q2.Q;
         data.Gri = Q2.Gri;
@@ -87,33 +86,25 @@ const Design1 = () => {
             setResult1(JSON.stringify("200Watt"));
         }
 
+        console.log(data.HeatDissipated)
+        setResult2(data.area * data.HeatDissipated)
+
         setResult(JSON.stringify(data.time));
     }
 
     return <div style={{ width: '100%' }}>
         <form onSubmit={handleSubmit((data) => onSubmit(data))}>
 
-            <Grid sx={{ mt: 2 }} container alignItems="center"
-                justifyContent="center" spacing={2} >
-                <Grid item >
-                    <InputLabel id="demo-simple-select-label">Desirable Temperature</InputLabel>
-                    <OutlinedInput label="Desirable Temperature" id="outlined-number" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
-                    {/* <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" /> */}
-                </Grid>
-                <Grid item>
-                    <InputLabel id="demo-simple-select-label">Environment Temperature</InputLabel>
-                    <OutlinedInput label="Environment Temperature" id="outlined-number" type="number" step=".1"{...register("environTemp")} endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
-                    {/* <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" /> */}
-                </Grid>
-            </Grid>
+
 
 
             <br />
             <Box sx={{ m: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <Item >
-                    <Grid sx={{ pt: 6 }} container spacing={6}>
+                    <Grid sx={{ pt: 16 }} container spacing={6}>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label">Layer 1 Material</InputLabel>
+                            <InputLabel id="demo-simple-select-label"> Material</InputLabel>
+                            <br />
                             <Select
                                 placeholder='Layer 1 Material'
                                 id="demo-simple-select"
@@ -132,8 +123,10 @@ const Design1 = () => {
 
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label">Layer 1 Thickness in MM</InputLabel>
-                            <OutlinedInput id="outlined-number"  {...register("layer1Thickness")} placeholder="Layer 1 Thickness in MM" />
+                            <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel>
+                            <br />
+
+                            <OutlinedInput id="outlined-number" style={{ width: 100 }} {...register("layer1Thickness")} />
 
                             {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
                         </Grid>
@@ -144,7 +137,7 @@ const Design1 = () => {
 
                     <Grid container spacing={6} >
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label">Layer 2 Material</InputLabel>
+                            {/* <InputLabel id="demo-simple-select-label"> Material</InputLabel> */}
                             <Select
                                 placeholder='Layer 1 Material'
                                 id="demo-simple-select"
@@ -162,10 +155,10 @@ const Design1 = () => {
                             </Select>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label">Layer 2 Thickness in MM</InputLabel>
+                            {/* <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel> */}
 
-                            <TextField focusColor='grey' id="outlined-basic" variant="outlined"
-                                default={0}  {...register("layer2Thickness")} placeholder="Layer 2 Thickness in MM" />
+                            <TextField focusColor='grey' id="outlined-basic" variant="outlined" style={{ width: 100 }}
+                                default={0}  {...register("layer2Thickness")} />
 
                             {/* <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" /> */}
                         </Grid>
@@ -177,26 +170,40 @@ const Design1 = () => {
                     </Button>
                 </Item>
                 <Item>
+                    <Grid container alignItems="center"
+                        justifyContent="center" spacing={2} >
+                        <Grid item >
+                            <InputLabel id="demo-simple-select-label">T Surface (°C)</InputLabel>
+                            <OutlinedInput style={{ width: 100 }} label="Surface Temperature" id="outlined-number" type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
+                            {/* <input type="number" step=".1" defaultValue={25} {...register("desirableTemp")} placeholder="Desirable Temperature" /> */}
+                        </Grid>
+                        <Grid item>
+                            <InputLabel id="demo-simple-select-label">T Ambient (°C)</InputLabel>
+                            <OutlinedInput style={{ width: 100 }} label="Ambient Temperature" id="outlined-number" type="number" step=".1"{...register("environTemp")} endAdornment={<InputAdornment position="end">°C</InputAdornment>} />
+                            {/* <input type="number" step=".1"{...register("environTemp")} placeholder="Environmental Temperature" /> */}
+                        </Grid>
+                    </Grid>
                     <div>
                         <img src={require("../images/convection.png")} />
                     </div>
                 </Item>
                 <Item >
                     <div>
-                        <h2> Result:</h2>
-                        {(result !== "" && result1 !== "") &&
+                        <InputLabel id="demo-simple-select-label">Area in Sq Mts</InputLabel>
+                        <br />
+                        <OutlinedInput id="outlined-number" style={{ width: 100 }} {...register("area")} />
+                        {(result !== "" && result2 !== "") &&
                             <div sx={{ pt: 6 }}>
-                                <Grid container spacing={4}>
+                                <Grid container spacing={2}>
                                     <Grid item xs={12} sm={12}>
                                         <h3>Time Takes to Heat : <b>{result}</b></h3>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
-                                        <h3>Recommended Wattage for Mat: <b>{result1}</b> </h3>
+                                        <h3>Recommended Wattage for Mat: <b>{result2}</b> </h3>
                                     </Grid>
                                 </Grid>
                             </div>}
                     </div>
-
                 </Item>
             </Box>
         </form>
