@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Content from './components/Content'
 import Design from './components/Design';
+import Design1 from './components/Design1';
 import Nav from './components/Nav'
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -23,7 +24,7 @@ function App() {
         <div className="circle small shade5"></div>
       </div>
       <CssBaseline />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Nav />
         <main>
           {/* <Grid container spacing={5} sx={{ mt: 3 }}>
@@ -36,14 +37,14 @@ function App() {
               </div>
             </Grid>
           </Grid> */}
-          <Design />
+          <Design1 />
 
           <Container maxWidth="lg" className='footer' >
             <Grid xs={12} sm={12}>
               <div size="small">
-                <center>
+                {/* <center>
                   <img src={require("./images/thermopadslogo.png")} />
-                </center>
+                </center> */}
 
               </div>
               <div>

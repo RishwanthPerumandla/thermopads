@@ -10,11 +10,15 @@ function Nav(props) {
 
     return (
         <React.Fragment>
-            <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <div size="small">
-                    <img src={require("../images/thermopadslogo.png")} />
-                </div>
-                <Typography
+            <Toolbar alignItems="center"
+                justifyContent="center" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <center>
+                    <div size="large">
+                        <img src={require("../images/thermopadslogo.png")} />
+                    </div>
+                </center>
+
+                {/* <Typography
                     component="h2"
                     variant="h5"
                     color="inherit"
@@ -23,11 +27,11 @@ function Nav(props) {
                     sx={{ flex: 1 }}
                 >
 
-                </Typography>
+                </Typography> */}
 
-                <div size="small">
+                {/* <div size="small">
                     <img src={require("../images/grietlogo.png")} />
-                </div>
+                </div> */}
             </Toolbar>
 
         </React.Fragment>
