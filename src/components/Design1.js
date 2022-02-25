@@ -183,7 +183,7 @@ const Design1 = () => {
                 </Item>
                 <Item >
                     <div>
-                        Result:
+                        <h2> Result:</h2>
                         {(result !== "" && result1 !== "") &&
                             <div sx={{ pt: 6 }}>
                                 <Grid container spacing={4}>
