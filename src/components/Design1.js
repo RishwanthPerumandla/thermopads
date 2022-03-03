@@ -99,7 +99,7 @@ const Design1 = () => {
 
 
             <br />
-            <Box sx={{ m: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+            <Box sx={{ m: 5, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <Item >
                     <Grid sx={{ pt: 16 }} container spacing={6}>
                         <Grid item xs={12} sm={6}>
@@ -126,12 +126,14 @@ const Design1 = () => {
                             <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel>
                             <br />
 
-                            <OutlinedInput id="outlined-number" style={{ width: 100 }} {...register("layer1Thickness")} />
+                            <OutlinedInput id="outlined-number" style={{ width: 50 }} {...register("layer1Thickness")} />
 
                             {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
                         </Grid>
                     </Grid>
 
+                    <br />
+                    <br />
                     <br />
                     <br />
 
@@ -157,7 +159,7 @@ const Design1 = () => {
                         <Grid item xs={12} sm={6}>
                             {/* <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel> */}
 
-                            <TextField focusColor='grey' id="outlined-basic" variant="outlined" style={{ width: 100 }}
+                            <TextField focusColor='grey' id="outlined-basic" variant="outlined" style={{ width: 50 }}
                                 default={0}  {...register("layer2Thickness")} />
 
                             {/* <input {...register("layer2Thickness")} default={0} placeholder="layer2 Thickness" /> */}
@@ -184,7 +186,7 @@ const Design1 = () => {
                         </Grid>
                     </Grid>
                     <div>
-                        <img src={require("../images/convection.png")} />
+                        <img src={require("../images/cover.jpeg")} />
                     </div>
                 </Item>
                 <Item >

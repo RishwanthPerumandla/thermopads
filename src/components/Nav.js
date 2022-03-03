@@ -18,20 +18,6 @@ function Nav(props) {
                     </div>
                 </center>
 
-                {/* <Typography
-                    component="h2"
-                    variant="h5"
-                    color="inherit"
-                    align="center"
-                    noWrap
-                    sx={{ flex: 1 }}
-                >
-
-                </Typography> */}
-
-                {/* <div size="small">
-                    <img src={require("../images/grietlogo.png")} />
-                </div> */}
             </Toolbar>
 
         </React.Fragment>
