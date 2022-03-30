@@ -53,7 +53,7 @@ function secondsToHms(d) {
     var s = Math.floor(d % 3600 % 60);
 
     var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes") : "";
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return hDisplay + mDisplay;
 }
@@ -197,10 +197,11 @@ const Design1 = () => {
                             <div sx={{ pt: 6 }}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={12}>
-                                        <h3>Time Takes to Heat : <b>{result}</b></h3>
+                                        <h3>Time Takes to Heat : </h3>
+                                        <h2>{result}</h2>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
-                                        <h3>Recommended Wattage for Mat: <b>{result2}</b> </h3>
+                                        <h3>Recommended Wattage for Mat:  </h3><h1>{result2}</h1>
                                     </Grid>
                                 </Grid>
                             </div>}
