@@ -93,10 +93,6 @@ const Design1 = () => {
 
     return <div style={{ width: '100%' }}>
         <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-
-
-
-
             <br />
             <Box sx={{ m: 5, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <Item >
@@ -111,6 +107,7 @@ const Design1 = () => {
                                 label="Layer 1 Material"
                                 input={<OutlinedInput />}
                                 fullWidth
+                               
                             >
                                 <MenuItem value={"concrete"}>Concrete</MenuItem>
                                 <MenuItem value={"wood"}>Wood</MenuItem>
@@ -122,10 +119,12 @@ const Design1 = () => {
 
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel>
+                            <InputLabel id="demo-simple-select-label" style={{overflow:'visible'}} >Thickness in MM</InputLabel>
                             <br />
+                            <Box marginRight={10}  >
 
-                            <OutlinedInput id="outlined-number" style={{ width: 50 }} {...register("layer1Thickness")} />
+                            <OutlinedInput id="outlined-number" style={{ width: 50 }} {...register("layer1Thickness")}  />
+                            </Box>
 
                             {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
                         </Grid>
@@ -165,7 +164,11 @@ const Design1 = () => {
                         </Grid>
                     </Grid>
                     <br />
-                    <br />
+                    <InputLabel id="demo-simple-select-label">Area in Sq Mts</InputLabel>
+                    <OutlinedInput id="outlined-number" style={{ width: 100 }} {...register("area")} />
+
+                        <br />
+                        <br />
                     <Button type="submit" variant="contained" primary  >
                         Submit
                     </Button>
@@ -190,9 +193,7 @@ const Design1 = () => {
                 </Item>
                 <Item >
                     <div>
-                        <InputLabel id="demo-simple-select-label">Area in Sq Mts</InputLabel>
-                        <br />
-                        <OutlinedInput id="outlined-number" style={{ width: 100 }} {...register("area")} />
+                      
                         {(result !== "" && result2 !== "") &&
                             <div sx={{ pt: 6 }}>
                                 <Grid container spacing={2}>
