@@ -98,7 +98,7 @@ const Design1 = () => {
                 <Item >
                     <Grid sx={{ pt: 16 }} container spacing={6}>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel id="demo-simple-select-label"> Material</InputLabel>
+                            <InputLabel id="demo-simple-select-label" style={{overflow:'visible'}} >Top Layer Material</InputLabel>
                             <br />
                             <Select
                                 placeholder='Layer 1 Material'
@@ -121,10 +121,8 @@ const Design1 = () => {
                         <Grid item xs={12} sm={6}>
                             <InputLabel id="demo-simple-select-label" style={{overflow:'visible'}} >Thickness in MM</InputLabel>
                             <br />
-                            <Box marginRight={10}  >
-
                             <OutlinedInput id="outlined-number" style={{ width: 50 }} {...register("layer1Thickness")}  />
-                            </Box>
+                     
 
                             {/* <input {...register("layer1Thickness")} placeholder="layer1 Thickness" /> */}
                         </Grid>
@@ -132,12 +130,15 @@ const Design1 = () => {
 
                     <br />
                     <br />
-                    <br />
-                    <br />
+                 
 
                     <Grid container spacing={6} >
                         <Grid item xs={12} sm={6}>
-                            {/* <InputLabel id="demo-simple-select-label"> Material</InputLabel> */}
+                         
+
+                            <InputLabel id="demo-simple-select-label" style={{overflow:'visible'}}>Intermediate layer <br/> Material</InputLabel>
+                         
+                            <br />
                             <Select
                                 placeholder='Layer 1 Material'
                                 id="demo-simple-select"
@@ -155,8 +156,9 @@ const Design1 = () => {
                             </Select>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            {/* <InputLabel id="demo-simple-select-label">Thickness in MM</InputLabel> */}
-
+                            <InputLabel id="demo-simple-select-label" style={{overflow:'visible'}} >Thickness in MM</InputLabel>
+    <br />
+    <br />
                             <TextField focusColor='grey' id="outlined-basic" variant="outlined" style={{ width: 50 }}
                                 default={0}  {...register("layer2Thickness")} />
 
